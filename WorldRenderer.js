@@ -7,31 +7,27 @@ export class WorldRenderer {
   render(ctx) {
     const s_x = this.world.grid.size_x;
     const s_y = this.world.grid.size_y;
-    const imageData = this.ctx.createImageData(
-      s_x,
-      s_y
-    );
+    const imageData = this.ctx.createImageData(s_x, s_y);
 
     for (let x = 0; x < s_x; x++) {
       for (let y = 0; y < s_y; y++) {
         const id = y * s_x + x;
         // imageData.data[id * 4] = 50;
-        imageData.data[id * 4 + 0] = (y * 20) % 255;
-        imageData.data[id * 4 + 1] = (x * 20) % 255;
-        imageData.data[id * 4 + 2] = x + y;
-        imageData.data[id * 4 + 3] = 255;
+        const particle = this.world.grid.get_cell(x, y);
+        if (particle) {
+          imageData.data[id * 4 + 0] = particle.color.r;
+          imageData.data[id * 4 + 1] = particle.color.g;
+          imageData.data[id * 4 + 2] = particle.color.b;
+          imageData.data[id * 4 + 3] = 255;
+        } else {
+          imageData.data[id * 4 + 0] = 200;
+          imageData.data[id * 4 + 1] = 200;
+          imageData.data[id * 4 + 2] = 200;
+          imageData.data[id * 4 + 3] = 255;
+        }
       }
     }
-    // for (let x = 0; x < s_x; ++x) {
-    //   for (let y = 0; y < s_y; ++y) {
-    //     imageData.data[y * s_x + x] = 1;
-    //   }
-    // }
 
-    // for (let i = 0; i < imageData.data.length; ++i){
-    //   imageData.data[i] = 255;
-    // }
-
-    this.ctx.putImageData(imageData, 20, 20);
+    this.ctx.putImageData(imageData, 0, 0);
   }
 }

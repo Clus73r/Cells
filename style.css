@@ -1,3 +1,25 @@
+body {
+  margin: 0cm;
+  padding: 0cm;
+}
+
 canvas {
-    image-rendering: pixelated;
+  /* position: absolute; */
+  /* top: -4cm;
+  left: -4cm; */
+  image-rendering: pixelated;
+  padding: 0cm;
+  margin: 0cm;
+  display: block;
+}
+
+.grid-container {
+  display: flex;
+  /* column-gap: 0.5rem; */
+  /* width: 100%; */
+}
+
+.btn-group-vertical {
+  height: 3cm;
+  width: 3cm;
 }
