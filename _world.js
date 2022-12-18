@@ -1,4 +1,4 @@
-import { Color, Particle } from "./particle.js";
+import { Color, Particle } from "./_particle.js";
 
 export class Grid {
   constructor(size_x, size_y) {
@@ -19,10 +19,25 @@ export class Grid {
     this.set_cell(x, y, this.get_cell(x2, y2));
     this.set_cell(x2, y2, p1);
   }
+  move_cell(x, y, x2, y2) {
+    const p1 = this.get_cell(x, y);
+    const p2 = this.get_cell(x2, y2);
+    if (!p2) {
+      this.set_cell(x2, y2, p1);
+      this.set_cell(x, y, null);
+    }
+  }
   defer(act) {
     if (act) this.deferred.push(act);
   }
   execute_deferred() {
+    for (let i = this.deferred.length - 1; i > 0; --i) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.deferred[i], this.deferred[j]] = [
+        this.deferred[j],
+        this.deferred[i],
+      ];
+    }
     for (let [func, ...args] of this.deferred) {
       func.call(this, ...args);
     }

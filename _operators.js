@@ -1,5 +1,5 @@
-import { Color, Particle } from "./particle.js";
-import { World, Grid } from "./world.js";
+import { Color, Particle } from "./_particle.js";
+import { World, Grid } from "./_world.js";
 
 class DrawOperator {
   constructor(name, world) {
