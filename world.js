@@ -1,4 +1,4 @@
-import { Color, Particle } from "./_particle.js";
+import { Color, Particle } from "./particle.js";
 
 export class Grid {
   constructor(size_x, size_y) {
