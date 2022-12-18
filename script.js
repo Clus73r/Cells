@@ -1,6 +1,6 @@
 import { DrawGround, DrawSand, DrawWater } from "./Operators.js";
 import { Color, Particle } from "./Particle.js";
-import { World } from "./world.js";
+import { World } from "./World.js";
 import { WorldRenderer } from "./WorldRenderer.js";
 import { FallingSolver, LiquidSolver } from "./Solvers.js";
 
