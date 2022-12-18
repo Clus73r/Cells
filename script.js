@@ -1,15 +1,18 @@
-import { DrawGround, DrawSand } from "./Operators.js";
+import { DrawGround, DrawSand, DrawWater } from "./Operators.js";
 import { Color, Particle } from "./Particle.js";
 import { World } from "./world.js";
 import { WorldRenderer } from "./WorldRenderer.js";
-import { SandSolver } from "./Solvers.js";
+import { FallingSolver, LiquidSolver } from "./Solvers.js";
 
 let operator = null;
 const canvas = document.getElementById("canvas");
 
-const size_x = 256;
-const size_y = 256;
-const upscale = 3;
+const size_x = 64;
+const size_y = 64;
+const upscale = 10;
+// const size_x = 256;
+// const size_y = 256;
+// const upscale = 3;
 
 addEventListener("mousedown", (e) => {
   if (operator && "mouse_down" in operator) {
@@ -40,8 +43,8 @@ addEventListener("mousemove", (e) => {
 (function main() {
   canvas.setAttribute("width", size_x);
   canvas.setAttribute("height", size_y);
-  canvas.style.width = `${size_x * upscale}px`;
-  canvas.style.height = `${size_y * upscale}px`;
+  // canvas.style.width = `${size_x * upscale}px`;
+  // canvas.style.height = `${size_y * upscale}px`;
   const ctx = canvas.getContext("2d");
 
   let world = new World(size_x, size_y);
@@ -50,6 +53,7 @@ addEventListener("mousemove", (e) => {
   let operators = [
     new DrawGround("Ground", world),
     new DrawSand("Sand", world),
+    new DrawWater("Water", world),
   ];
 
   const operator_container = document.getElementById("operator-container");
@@ -76,7 +80,8 @@ addEventListener("mousemove", (e) => {
   operator = operators[0];
   // operator = new DrawSand(world);
 
-  world.register_solver(new SandSolver(world));
+  world.register_solver(new FallingSolver(world));
+  world.register_solver(new LiquidSolver(world));
 
   (function tick() {
     if ("tick" in operator) operator.tick();

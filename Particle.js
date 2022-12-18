@@ -5,11 +5,13 @@ export class Color {
     this.b = b;
   }
 }
+
 export class Particle {
   constructor(color, props) {
     this.color = color;
-    for (let p of props) {
-      this[p] = "";
-    }
+    this.properties = new Set(props);
+    // for (let p of props) {
+    //   this[p] = "";
+    // }
   }
 }
