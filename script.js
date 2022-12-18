@@ -1,8 +1,8 @@
-import { DrawGround, DrawSand, DrawWater } from "./Operators.js";
-import { Color, Particle } from "./Particle.js";
-import { World } from "./World.js";
-import { WorldRenderer } from "./WorldRenderer.js";
-import { FallingSolver, LiquidSolver } from "./Solvers.js";
+import { DrawGround, DrawSand, DrawWater } from "./operators.js";
+import { Color, Particle } from "./particle.js";
+import { World } from "./world.js";
+import { WorldRenderer } from "./world_renderer.js";
+import { FallingSolver, LiquidSolver } from "./solvers.js";
 
 let operator = null;
 const canvas = document.getElementById("canvas");
