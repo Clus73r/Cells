@@ -22,11 +22,11 @@ export class FallingSolver {
     const rand2 = Math.random();
     const left = g.get_cell(x - 1, y + 1);
     if (rand > 0.5) {
-      if (!left && !g.get_cell(x - 1, y) && rand2 > 0.8)
+      if (!left && !g.get_cell(x - 1, y) && rand2 > 0.1)
         return [this.world.grid.move_cell, x, y, x - 1, y + 1];
     } else {
       const right = g.get_cell(x + 1, y + 1);
-      if (!right && !g.get_cell(x + 1, y) && rand2 > 0.8)
+      if (!right && !g.get_cell(x + 1, y) && rand2 > 0.1)
         return [this.world.grid.move_cell, x, y, x + 1, y + 1];
     }
     const rand3 = Math.random();
@@ -68,12 +68,12 @@ export class LiquidSolver {
     if (p.properties.has("flow_right")) {
       // return [g.move_cell, x, y, x + 1, y];
       if (!g.get_cell(x + 1, y + 1)) return [g.move_cell, x, y, x + 1, y + 1];
-      return [g.line_move_cell, x, y, x + 2, y];
+      return [g.line_move_cell, x, y, x + 1, y];
     }
     if (p.properties.has("flow_left")) {
       // return [g.move_cell, x, y, x - 1, y];
       if (!g.get_cell(x - 1, y + 1)) return [g.move_cell, x, y, x - 1, y + 1];
-      return [g.line_move_cell, x, y, x - 2, y];
+      return [g.line_move_cell, x, y, x - 1, y];
     }
     // if (
     //   (!p.properties.has("flow_left") || g.get_cell(x - 1, y)) &&

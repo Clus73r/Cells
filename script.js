@@ -7,8 +7,8 @@ import { FallingSolver, LiquidSolver } from "./solvers.js";
 let operator = null;
 const canvas = document.getElementById("canvas");
 
-const size_x = 256;
-const size_y = 256;
+const size_x = 64;
+const size_y = 64;
 const upscale = 10;
 // const size_x = 256;
 // const size_y = 256;
