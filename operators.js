@@ -35,6 +35,7 @@ class DrawOperator {
       this.world.grid.size_y
     ) {
       this.rand = Math.floor(Math.random() * 20);
+      // this.world.grid.set_cell(this.x, this.y, this.get_particle());
       const radius_sqr = this.size * this.size;
       for (let px = 0; px < 10; ++px) {
         for (let py = 0; py < 10; ++py) {

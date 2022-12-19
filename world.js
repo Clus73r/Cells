@@ -14,11 +14,11 @@ export class Grid {
   set_cell(x, y, value) {
     this.cells[y * this.size_y + x] = value;
   }
-  swap_cells(x, y, x2, y2) {
-    const p1 = this.get_cell(x, y);
-    this.set_cell(x, y, this.get_cell(x2, y2));
-    this.set_cell(x2, y2, p1);
-  }
+  // swap_cells(x, y, x2, y2) {
+  //   const p1 = this.get_cell(x, y);
+  //   this.set_cell(x, y, this.get_cell(x2, y2));
+  //   this.set_cell(x2, y2, p1);
+  // }
   move_cell(x, y, x2, y2) {
     const p1 = this.get_cell(x, y);
     const p2 = this.get_cell(x2, y2);
@@ -27,8 +27,40 @@ export class Grid {
       this.set_cell(x, y, null);
     }
   }
+  line_move_cell(x, y, x2, y2) {
+    const p1 = this.get_cell(x, y);
+    const [new_x, new_y] = this.line_trace(x, y, x2, y2);
+    if (!this.get_cell(new_x, new_y)) {
+      this.set_cell(new_x, new_y, p1);
+      this.set_cell(x, y, null);
+    }
+  }
+  line_trace(x, y, x2, y2) {
+    const dx = x2 - x;
+    const dy = y2 - y;
+    let steps;
+    if (Math.abs(dx) > Math.abs(dy)) {
+      steps = Math.abs(dx);
+    } else {
+      steps = Math.abs(dy);
+    }
+    const x_inc = dx / Number(steps);
+    const y_inc = dy / Number(steps);
+    let draw_x = x;
+    let draw_y = y;
+    let last_x = x;
+    let last_y = y;
+    for (let i = 0; i < steps; ++i) {
+      draw_x = draw_x + x_inc;
+      draw_y = draw_y + y_inc;
+      if (this.get_cell(draw_x, draw_y)) return [last_x, last_y];
+      last_x = draw_x;
+      last_y = draw_y;
+    }
+    return [x2, y2];
+  }
   defer(act) {
-    if (act) this.deferred.push(act);
+    if (act && act.length > 0) this.deferred.push(act);
   }
   execute_deferred() {
     for (let i = this.deferred.length - 1; i > 0; --i) {
