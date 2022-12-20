@@ -2,13 +2,13 @@ import { DrawGround, DrawSand, DrawWater } from "./operators.js";
 import { Color, Particle } from "./particle.js";
 import { World } from "./world.js";
 import { WorldRenderer } from "./world_renderer.js";
-import { FallingSolver, LiquidSolver } from "./solvers.js";
+import { SolidMovingRule, LiquidRule } from "./rules.js";
 
 let operator = null;
 const canvas = document.getElementById("canvas");
 
-const size_x = 64;
-const size_y = 64;
+const size_x = 256;
+const size_y = 256;
 const upscale = 10;
 // const size_x = 256;
 // const size_y = 256;
@@ -80,8 +80,9 @@ addEventListener("mousemove", (e) => {
   operator = operators[0];
   // operator = new DrawSand(world);
 
-  world.register_solver(new FallingSolver(world));
-  world.register_solver(new LiquidSolver(world));
+  world.add_rule(new SolidMovingRule(world));
+  world.add_rule(new LiquidRule(world));
+  // world.register_solver(new LiquidSolver(world));
 
   (function tick() {
     if ("tick" in operator) operator.tick();

@@ -7,7 +7,7 @@ class DrawOperator {
     this.name = name;
     this.x = 0;
     this.y = 0;
-    this.size = 5;
+    this.size = 3;
   }
   set_size(val) {
     this.size = val;
@@ -55,13 +55,13 @@ class DrawOperator {
 
 export class DrawSand extends DrawOperator {
   get_particle() {
-    return new Particle(new Color(250, 170, 57), ["falling"]);
+    return new Particle(new Color(250, 170, 57), ["SolidMoving"]);
   }
 }
 
 export class DrawWater extends DrawOperator {
   get_particle() {
-    return new Particle(new Color(20, 150, 230), ["liquid"]);
+    return new Particle(new Color(20, 150, 230), ["Liquid"]);
   }
   // vary(p) {}
 }
